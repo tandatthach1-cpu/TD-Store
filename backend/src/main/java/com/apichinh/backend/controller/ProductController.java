@@ -1,9 +1,9 @@
-package com.daohuybac.backend.controller;
+package com.apichinh.backend.controller;
 
-import com.daohuybac.backend.entity.Category;
-import com.daohuybac.backend.entity.Product;
-import com.daohuybac.backend.service.CategoryService;
-import com.daohuybac.backend.service.ProductService;
+import com.apichinh.backend.entity.Category;
+import com.apichinh.backend.entity.Product;
+import com.apichinh.backend.service.CategoryService;
+import com.apichinh.backend.service.ProductService;
 import java.io.IOException;
 import java.util.List;
 

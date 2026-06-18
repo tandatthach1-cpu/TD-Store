@@ -1,8 +1,8 @@
-package com.daohuybac.backend.service.impl;
+package com.apichinh.backend.service.impl;
 
-import com.daohuybac.backend.entity.Product;
-import com.daohuybac.backend.repository.ProductRepository;
-import com.daohuybac.backend.service.ProductService;
+import com.apichinh.backend.entity.Product;
+import com.apichinh.backend.repository.ProductRepository;
+import com.apichinh.backend.service.ProductService;
 import jakarta.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;

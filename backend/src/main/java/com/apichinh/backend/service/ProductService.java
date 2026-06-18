@@ -1,6 +1,6 @@
-package com.daohuybac.backend.service;
+package com.apichinh.backend.service;
 
-import com.daohuybac.backend.entity.Product;
+import com.apichinh.backend.entity.Product;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.data.domain.Page;
