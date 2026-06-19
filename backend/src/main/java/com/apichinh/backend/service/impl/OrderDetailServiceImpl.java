@@ -1,8 +1,8 @@
-package com.daohuybac.backend.service.impl;
+package com.apichinh.backend.service.impl;
 
-import com.daohuybac.backend.entity.OrderDetail;
-import com.daohuybac.backend.repository.OrderDetailRepository;
-import com.daohuybac.backend.service.OrderDetailService;
+import com.apichinh.backend.entity.OrderDetail;
+import com.apichinh.backend.repository.OrderDetailRepository;
+import com.apichinh.backend.service.OrderDetailService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;

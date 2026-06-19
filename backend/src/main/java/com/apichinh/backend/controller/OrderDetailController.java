@@ -1,7 +1,7 @@
-package com.daohuybac.backend.controller;
+package com.apichinh.backend.controller;
 
-import com.daohuybac.backend.entity.OrderDetail;
-import com.daohuybac.backend.service.OrderDetailService;
+import com.apichinh.backend.entity.OrderDetail;
+import com.apichinh.backend.service.OrderDetailService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

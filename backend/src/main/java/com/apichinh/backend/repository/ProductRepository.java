@@ -1,7 +1,7 @@
-package com.daohuybac.backend.repository;
+package com.apichinh.backend.repository;
 
 
-import com.daohuybac.backend.entity.Product;
+import com.apichinh.backend.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package com.daohuybac.backend.entity;
+package com.apichinh.backend.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

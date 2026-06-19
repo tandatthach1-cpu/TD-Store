@@ -1,7 +1,7 @@
-package com.daohuybac.backend.controller;
+package com.apichinh.backend.controller;
 
-import com.daohuybac.backend.entity.User;
-import com.daohuybac.backend.service.UserService;
+import com.apichinh.backend.entity.User;
+import com.apichinh.backend.service.UserService;
 import java.io.IOException;
 
 import org.springframework.data.domain.Page;
@@ -71,6 +71,13 @@ public class UserController {
     @GetMapping("/email/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) {
         User user = userService.getUserByEmail(email);
+        return user != null ? new ResponseEntity<>(user, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    // New endpoint to fetch user by phone number
+    @GetMapping("/phone/{phone}")
+    public ResponseEntity<User> getUserByPhone(@PathVariable("phone") String phone) {
+        User user = userService.getUserByPhone(phone);
         return user != null ? new ResponseEntity<>(user, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 

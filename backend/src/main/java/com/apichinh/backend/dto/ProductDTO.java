@@ -8,10 +8,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDTO {
-    private Long productId; // ID của sản phẩm
-    private String name; // Tên sản phẩm
-    private String description; // Mô tả sản phẩm
-    private Double price; // Giá sản phẩm
-    private String imageUrl; // Đường dẫn hình ảnh sản phẩm
-    private Long categoryId; // ID danh mục mà sản phẩm thuộc về
+    private Long id;
+    private String name;
+    private String price;
+    private String img;
+    private String category;
+    private boolean featured;
+    private boolean bestSeller;
+    // Bạn có thể thêm các trường khác như oldPrice, description, gallery, variants nếu cần cho trang chi tiết sản phẩm
 }

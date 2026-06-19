@@ -1,4 +1,4 @@
-package com.daohuybac.backend.response;
+package com.apichinh.backend.response;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;

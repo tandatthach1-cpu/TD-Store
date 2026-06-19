@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductInfoDTO {
+public class NewsDTO {
     private Long id;
-    private Long productId; 
-    private Long userId;    
-    private String comment;
-    private boolean favorite;
+    private String title;
+    private String description;
+    private String img;
+    private String date;
+    private String category;
 }

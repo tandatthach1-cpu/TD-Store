@@ -1,9 +1,9 @@
-package com.daohuybac.backend.service.impl;
+package com.apichinh.backend.service.impl;
 
-import com.daohuybac.backend.entity.User;
-import com.daohuybac.backend.repository.AddressRepository;
-import com.daohuybac.backend.repository.UserRepository;
-import com.daohuybac.backend.service.UserService;
+import com.apichinh.backend.entity.User;
+import com.apichinh.backend.repository.AddressRepository;
+import com.apichinh.backend.repository.UserRepository;
+import com.apichinh.backend.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,6 +26,21 @@ public class UserServiceImpl implements UserService {
    }
 
    public User createUser(User user) {
+      // Ensure unique username – if duplicate, append a numeric suffix
+      String baseUsername = user.getUsername();
+      if (baseUsername == null || baseUsername.trim().isEmpty()) {
+          // Fallback: use email prefix or phone
+          baseUsername = (user.getEmail() != null && !user.getEmail().isEmpty())
+                  ? user.getEmail().split("@")[0]
+                  : (user.getNumphone() != null ? user.getNumphone() : "user");
+      }
+      String candidate = baseUsername;
+      int suffix = 1;
+      while (this.userRepository.existsByUsername(candidate)) {
+          candidate = baseUsername + suffix;
+          suffix++;
+      }
+      user.setUsername(candidate);
       return (User) this.userRepository.save(user);
    }
 
@@ -41,6 +56,14 @@ public class UserServiceImpl implements UserService {
    public User getUser(String user) {
       Optional<User> optionalUser = this.userRepository.findByUsername(user);
       return optionalUser.orElse(null);
+   }
+
+   @Override
+   public User getUserByPhone(String phone) {
+      if (phone == null || phone.trim().isEmpty()) {
+         return null;
+      }
+      return this.userRepository.findByNumphone(phone.trim()).orElse(null);
    }
 
    @Override

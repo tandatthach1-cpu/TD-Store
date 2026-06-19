@@ -1,7 +1,7 @@
-package com.daohuybac.backend.controller;
+package com.apichinh.backend.controller;
 
-import com.daohuybac.backend.entity.SlideShow;
-import com.daohuybac.backend.service.SlideShowService;
+import com.apichinh.backend.entity.SlideShow;
+import com.apichinh.backend.service.SlideShowService;
 import java.io.IOException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

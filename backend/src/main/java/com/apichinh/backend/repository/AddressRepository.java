@@ -1,4 +1,4 @@
-package com.daohuybac.backend.repository;
+package com.apichinh.backend.repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.daohuybac.backend.entity.Address;
+import com.apichinh.backend.entity.Address;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {

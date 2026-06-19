@@ -1,4 +1,4 @@
-package com.daohuybac.backend.entity;
+package com.apichinh.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;

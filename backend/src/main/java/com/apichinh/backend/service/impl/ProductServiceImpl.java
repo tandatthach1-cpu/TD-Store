@@ -1,6 +1,8 @@
 package com.apichinh.backend.service.impl;
 
+import com.apichinh.backend.entity.OrderDetail;
 import com.apichinh.backend.entity.Product;
+import com.apichinh.backend.repository.OrderDetailRepository;
 import com.apichinh.backend.repository.ProductRepository;
 import com.apichinh.backend.service.ProductService;
 import jakarta.persistence.EntityNotFoundException;

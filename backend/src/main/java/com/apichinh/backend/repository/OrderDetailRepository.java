@@ -1,8 +1,8 @@
-package com.daohuybac.backend.repository;
+package com.apichinh.backend.repository;
 
 
 
-import com.daohuybac.backend.entity.OrderDetail;
+import com.apichinh.backend.entity.OrderDetail;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,10 +1,10 @@
-package com.daohuybac.backend.service;
+package com.apichinh.backend.service;
 
 
 
-import com.daohuybac.backend.dto.ProductInfoDTO;
+import com.apichinh.backend.dto.ProductInfoDTO;
 
-import com.daohuybac.backend.response.ProductInfoResponse;
+import com.apichinh.backend.response.ProductInfoResponse;
 import java.util.List;
 
 public interface ProductInfoService {

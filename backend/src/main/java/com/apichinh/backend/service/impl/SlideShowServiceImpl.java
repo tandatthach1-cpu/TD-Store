@@ -1,8 +1,8 @@
-package com.daohuybac.backend.service.impl;
+package com.apichinh.backend.service.impl;
 
-import com.daohuybac.backend.entity.SlideShow;
-import com.daohuybac.backend.repository.SlideShowRepository;
-import com.daohuybac.backend.service.SlideShowService;
+import com.apichinh.backend.entity.SlideShow;
+import com.apichinh.backend.repository.SlideShowRepository;
+import com.apichinh.backend.service.SlideShowService;
 import jakarta.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;

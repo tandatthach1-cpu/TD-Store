@@ -1,7 +1,7 @@
-package com.daohuybac.backend.controller;
+package com.apichinh.backend.controller;
 
-import com.daohuybac.backend.entity.Category;
-import com.daohuybac.backend.service.CategoryService;
+import com.apichinh.backend.entity.Category;
+import com.apichinh.backend.service.CategoryService;
 import java.io.IOException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

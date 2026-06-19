@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class HbawscBackendApplication {
+public class TandatBackendApplication {
     public static void main(String[] args) {
-        SpringApplication.run(HbawscBackendApplication.class, args);
+        SpringApplication.run(TandatBackendApplication.class, args);
     }
     @Bean
     public ModelMapper modelMapper() {

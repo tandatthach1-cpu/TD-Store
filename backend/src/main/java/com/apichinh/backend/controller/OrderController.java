@@ -1,7 +1,7 @@
-package com.daohuybac.backend.controller;
+package com.apichinh.backend.controller;
 
-import com.daohuybac.backend.entity.Order;
-import com.daohuybac.backend.service.OrderService;
+import com.apichinh.backend.entity.Order;
+import com.apichinh.backend.service.OrderService;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -62,7 +62,7 @@ public class OrderController {
       try {
          this.orderService.deleteOrder(orderId);
          return new ResponseEntity<>("Order successfully deleted!", HttpStatus.OK);
-      } catch (com.daohuybac.backend.exceptions.ResourceNotFoundException ex) {
+      } catch (com.apichinh.backend.exceptions.ResourceNotFoundException ex) {
          return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
       } catch (Exception ex) {
          return new ResponseEntity<>("Failed to delete order: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

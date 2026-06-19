@@ -1,4 +1,4 @@
-package com.daohuybac.backend.response;
+package com.apichinh.backend.response;
 
 
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
-package com.daohuybac.backend.service;
+package com.apichinh.backend.service;
 
-import com.daohuybac.backend.entity.Category;
+import com.apichinh.backend.entity.Category;
 import java.io.IOException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -2,6 +2,7 @@ package com.apichinh.backend.controller;
 
 import com.apichinh.backend.entity.Category;
 import com.apichinh.backend.entity.Product;
+import com.apichinh.backend.dto.ProductDTO;
 import com.apichinh.backend.service.CategoryService;
 import com.apichinh.backend.service.ProductService;
 import java.io.IOException;
@@ -28,6 +29,22 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping({ "api/products" })
 @CrossOrigin(origins = { "*" }, exposedHeaders = { "Content-Range" })
 public class ProductController {
+
+    // -----------------------------------------------------------------
+    // Helper: chuyển Entity sang DTO
+    // -----------------------------------------------------------------
+    private ProductDTO toDto(Product p) {
+        return new ProductDTO(
+                p.getId(),
+                p.getTitle(),
+                String.format("%,.0fđ", p.getPrice()),
+                p.getPhoto() != null ? "/api/image/products/" + p.getPhoto() : "https://via.placeholder.com/200",
+                p.getCategory() != null ? p.getCategory().getTitle() : "",
+                p.isFeatured(),
+                p.isBestSeller()
+        );
+    }
+
    private ProductService productService;
    private CategoryService categoryService;
 

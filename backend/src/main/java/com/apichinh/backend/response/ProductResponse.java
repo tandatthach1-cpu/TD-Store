@@ -1,6 +1,6 @@
-package com.daohuybac.backend.response;
+package com.apichinh.backend.response;
 
-import com.daohuybac.backend.dto.ProductDTO;
+import com.apichinh.backend.dto.ProductDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

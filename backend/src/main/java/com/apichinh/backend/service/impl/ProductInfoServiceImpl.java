@@ -1,14 +1,14 @@
-package com.daohuybac.backend.service.impl;
+package com.apichinh.backend.service.impl;
 
-import com.daohuybac.backend.dto.ProductInfoDTO;
-import com.daohuybac.backend.entity.ProductInfo;
-import com.daohuybac.backend.entity.User;
-import com.daohuybac.backend.entity.Product; 
-import com.daohuybac.backend.repository.ProductInfoRepository;
-import com.daohuybac.backend.repository.ProductRepository;
-import com.daohuybac.backend.repository.UserRepository;
-import com.daohuybac.backend.response.ProductInfoResponse;
-import com.daohuybac.backend.service.ProductInfoService;
+import com.apichinh.backend.dto.ProductInfoDTO;
+import com.apichinh.backend.entity.ProductInfo;
+import com.apichinh.backend.entity.User;
+import com.apichinh.backend.entity.Product; 
+import com.apichinh.backend.repository.ProductInfoRepository;
+import com.apichinh.backend.repository.ProductRepository;
+import com.apichinh.backend.repository.UserRepository;
+import com.apichinh.backend.response.ProductInfoResponse;
+import com.apichinh.backend.service.ProductInfoService;
 
 
 

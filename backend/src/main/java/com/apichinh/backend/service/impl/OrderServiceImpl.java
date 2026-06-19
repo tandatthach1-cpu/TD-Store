@@ -1,10 +1,10 @@
-package com.daohuybac.backend.service.impl;
+package com.apichinh.backend.service.impl;
 
-import com.daohuybac.backend.entity.Order;
-import com.daohuybac.backend.entity.OrderDetail;
-import com.daohuybac.backend.repository.OrderDetailRepository;
-import com.daohuybac.backend.repository.OrderRepository;
-import com.daohuybac.backend.service.OrderService;
+import com.apichinh.backend.entity.Order;
+import com.apichinh.backend.entity.OrderDetail;
+import com.apichinh.backend.repository.OrderDetailRepository;
+import com.apichinh.backend.repository.OrderRepository;
+import com.apichinh.backend.service.OrderService;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -64,7 +64,7 @@ public class OrderServiceImpl implements OrderService {
       boolean exists = this.orderRepository.existsById(orderId);
       logger.info("Order existsById={} for orderId={}", exists, orderId);
       if (!exists) {
-         throw new com.daohuybac.backend.exceptions.ResourceNotFoundException(
+         throw new com.apichinh.backend.exceptions.ResourceNotFoundException(
                "Order",
                "id",
                orderId

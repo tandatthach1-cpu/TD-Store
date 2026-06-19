@@ -1,4 +1,4 @@
-package com.daohuybac.backend.entity;
+package com.apichinh.backend.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

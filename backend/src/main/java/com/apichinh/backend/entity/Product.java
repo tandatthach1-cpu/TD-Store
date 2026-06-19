@@ -1,4 +1,4 @@
-package com.daohuybac.backend.entity;
+package com.apichinh.backend.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,18 +15,29 @@ public class Product {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
+
    @Column(nullable = false)
    private String title;
+
    @Column(nullable = true)
    private String description;
+
    @Column(nullable = true)
    private String photo;
+
    @Column(nullable = false)
    private double price;
+
+   @Column(nullable = false)
+   private boolean featured = false;
+
+   @Column(nullable = false)
+   private boolean bestSeller = false;
 
    @ManyToOne
    @JoinColumn(name = "category_id", nullable = true)
    private Category category;
+
    @Column(name = "category_id", insertable = false, updatable = false)
    private Long categoryId;
 
@@ -50,8 +61,20 @@ public class Product {
       return this.price;
    }
 
+   public boolean isFeatured() {
+      return this.featured;
+   }
+
+   public boolean isBestSeller() {
+      return this.bestSeller;
+   }
+
+   public Category getCategory() {
+      return this.category;
+   }
+
    public Long getCategoryId() {
-      return categoryId;
+      return this.categoryId;
    }
 
    public void setId(final Long id) {
@@ -74,21 +97,21 @@ public class Product {
       this.price = price;
    }
 
-   public void setCategoryId(Long categoryId) {
-      this.categoryId = categoryId;
+   public void setFeatured(final boolean featured) {
+      this.featured = featured;
    }
 
-   public Category getCategory() {
-      return this.category;
+   public void setBestSeller(final boolean bestSeller) {
+      this.bestSeller = bestSeller;
    }
 
    public void setCategory(final Category category) {
       this.category = category;
-      if (category != null) {
-         this.categoryId = category.getId(); // Cập nhật categoryId khi category thay đổi
-      } else {
-         this.categoryId = null; // Đặt categoryId thành null nếu category là null
-      }
+      this.categoryId = category != null ? category.getId() : null;
+   }
+
+   public void setCategoryId(final Long categoryId) {
+      this.categoryId = categoryId;
    }
 
    public Product() {
@@ -102,10 +125,6 @@ public class Product {
       this.photo = photo;
       this.price = price;
       this.category = category;
-      if (category != null) {
-         this.categoryId = category.getId(); // Cập nhật categoryId trong constructor
-      } else {
-         this.categoryId = null; // Đặt categoryId thành null nếu category là null
-      }
+      this.categoryId = category != null ? category.getId() : null;
    }
 }

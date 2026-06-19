@@ -1,6 +1,6 @@
-package com.daohuybac.backend.service;
+package com.apichinh.backend.service;
 
-import com.daohuybac.backend.entity.User;
+import com.apichinh.backend.entity.User;
 import java.io.IOException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +12,7 @@ public interface UserService {
    User createUser(User user);
 
    User getUser(String user);
+   User getUserByPhone(String phone);
 
    User getUserByEmail(String email);
 

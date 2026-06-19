@@ -1,11 +1,11 @@
-package com.daohuybac.backend.controller;
+package com.apichinh.backend.controller;
 
 
 
-import com.daohuybac.backend.dto.ProductInfoDTO;
+import com.apichinh.backend.dto.ProductInfoDTO;
 import java.util.List;
-import com.daohuybac.backend.response.ProductInfoResponse;
-import com.daohuybac.backend.service.ProductInfoService;
+import com.apichinh.backend.response.ProductInfoResponse;
+import com.apichinh.backend.service.ProductInfoService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("api/productinfo")
+@RequestMapping("/api/productinfo")
 @CrossOrigin(origins = "*", exposedHeaders = "Content-Range")
 public class ProductInfoController {
     private final ProductInfoService productInfoService;
@@ -25,31 +25,31 @@ public class ProductInfoController {
         this.productInfoService = productInfoService;
     }
 
-    @PostMapping("/favorite")
+    @PostMapping("/favorites")
     public ResponseEntity<ProductInfoResponse> addFavorite(@RequestBody ProductInfoDTO productInfoDTO) {
         // Gọi service để thêm sản phẩm yêu thích
         ProductInfoResponse response = productInfoService.addFavorite(productInfoDTO);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
  
-    @GetMapping("/favorite/{userId}")
+    @GetMapping("/favorites/user/{userId}")
     public ResponseEntity<List<ProductInfoResponse>> getFavorites(@PathVariable Long userId) {
         // Gọi service để lấy danh sách sản phẩm yêu thích cho người dùng
         List<ProductInfoResponse> response = productInfoService.getFavoritesByUserId(userId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping("/favorite/{id}")
+    @DeleteMapping("/favorites/{id}")
     public ResponseEntity<Void> deleteFavorite(@PathVariable Long id) {
         productInfoService.deleteFavorite(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    @GetMapping("/favorite/check/{userId}/{productId}")
+    @GetMapping("/favorites/check/{userId}/{productId}")
 public ResponseEntity<Boolean> checkIfFavorite(@PathVariable Long userId, @PathVariable Long productId) {
     boolean isFavorite = productInfoService.isFavorite(userId, productId);
     return new ResponseEntity<>(isFavorite, HttpStatus.OK);
 }
-@PostMapping("/comment")
+@PostMapping("/comments")
 public ResponseEntity<ProductInfoResponse> addComment(@RequestBody ProductInfoDTO productInfoDTO) {
     ProductInfoResponse response = productInfoService.addComment(productInfoDTO);
     return new ResponseEntity<>(response, HttpStatus.CREATED);

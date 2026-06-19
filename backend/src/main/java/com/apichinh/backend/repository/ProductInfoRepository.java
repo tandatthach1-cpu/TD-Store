@@ -1,6 +1,6 @@
-package com.daohuybac.backend.repository;
+package com.apichinh.backend.repository;
 
-import com.daohuybac.backend.entity.ProductInfo;
+import com.apichinh.backend.entity.ProductInfo;
 
 import java.util.List;
 
