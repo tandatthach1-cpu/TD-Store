@@ -8,28 +8,29 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ProductService {
-    String uploadDir = "image/products";
+   String uploadDir = "image/products";
 
-    Product createProduct(Product product);
+   Product createProduct(Product product);
 
-    Product getProductById(Long productId);
+   Product getProductById(Long productId);
 
-    Page<Product> getAllProducts(Pageable pageable);
+   Page<Product> getAllProducts(Pageable pageable);
 
-    Product updateProduct(Product product);
+   Page<Product> getAdminProducts(String search, Long categoryId, Long brandId, Boolean visible, Pageable pageable);
 
-    void deleteProduct(Long productId);
+   Product updateProduct(Product product);
 
-    Product uploadProduct(Product product, MultipartFile file) throws IOException;
+   void deleteProduct(Long productId);
 
-    Product updateProductWithFile(Long productId, Product product, MultipartFile file) throws IOException;
+   Product uploadProduct(Product product, MultipartFile file) throws IOException;
 
-    Page<Product> searchProductByKeyword(String keyword, Long categoryId, Integer pageNumber, Integer pageSize);
+   Product updateProductWithFile(Long productId, Product product, MultipartFile file) throws IOException;
 
-    Page<Product> getProductsByCategoryTitle(String categoryTitle, Pageable pageable);
+   Page<Product> searchProductByKeyword(String keyword, Long categoryId, Integer pageNumber, Integer pageSize);
 
-    Page<Product> getProductsByCategoryId(Long categoryId, Pageable pageable);
+   Page<Product> getProductsByCategoryTitle(String categoryTitle, Pageable pageable);
 
-    List<Product> getSuggestionsByCategory(Long categoryId, Long excludeProductId, int limit);
+   Page<Product> getProductsByCategoryId(Long categoryId, Pageable pageable);
 
+   List<Product> getSuggestionsByCategory(Long categoryId, Long excludeProductId, int limit);
 }

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping({ "api/carts" })
+@RequestMapping({ "/api/carts" })
 @CrossOrigin(origins = { "*" }, exposedHeaders = { "Content-Range" })
 public class CartController {
    private final CartService cartService;
@@ -56,7 +56,7 @@ public class CartController {
    @GetMapping({ "/user/{userId}" })
    public ResponseEntity<List<Cart>> getCartByUserId(@PathVariable("userId") Long userId) {
       List<Cart> cart = this.cartService.getCartByUserId(userId);
-      return !cart.isEmpty() ? new ResponseEntity<>(cart, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      return new ResponseEntity<>(cart, HttpStatus.OK);
    }
 
    @GetMapping

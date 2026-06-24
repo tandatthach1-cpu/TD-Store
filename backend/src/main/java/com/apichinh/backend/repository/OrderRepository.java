@@ -13,5 +13,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
    // Lọc theo user đang đăng nhập (Order có field userId)
    List<Order> findByUserId(Long userId);
+
+   List<Order> findByUserIdOrderByDateDesc(Long userId);
 }
 

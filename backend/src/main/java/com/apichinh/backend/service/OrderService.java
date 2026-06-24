@@ -14,6 +14,8 @@ public interface OrderService {
 
    Order updateOrder(Order order);
 
+   Order confirmPayment(Long orderId);
+
    void deleteOrder(Long orderId);
 
    // Lấy danh sách order theo userId

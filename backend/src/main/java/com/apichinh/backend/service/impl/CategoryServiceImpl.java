@@ -47,6 +47,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         existingCategory.setTitle(category.getTitle());
         existingCategory.setDescription(category.getDescription());
+        existingCategory.setActive(category.isActive());
         return categoryRepository.save(existingCategory);
     }
 
@@ -68,6 +69,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         existingCategory.setTitle(category.getTitle());
         existingCategory.setDescription(category.getDescription());
+        existingCategory.setActive(category.isActive());
         return categoryRepository.save(existingCategory);
     }
 

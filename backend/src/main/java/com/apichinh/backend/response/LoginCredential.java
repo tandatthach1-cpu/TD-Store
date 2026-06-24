@@ -1,7 +1,5 @@
 package com.apichinh.backend.response;
 
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,9 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginCredential {
-    @Email
-    @Column(unique = true, nullable = false)
-    private String email;
-
+    private String account;
     private String password;
 }

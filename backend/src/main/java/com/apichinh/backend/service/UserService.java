@@ -16,6 +16,8 @@ public interface UserService {
 
    User getUserByEmail(String email);
 
+   User authenticate(String account, String password);
+
    User loginWithGoogle(User googleUser);
 
    User getUserById(Long userId);

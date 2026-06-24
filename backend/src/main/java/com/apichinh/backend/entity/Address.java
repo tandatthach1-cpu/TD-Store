@@ -25,6 +25,10 @@ public class Address {
 
     private String country;
 
+    private String receiverName;
+
+    private String receiverPhone;
+
     private Double latitude;
 
     private Double longitude;
@@ -56,6 +60,14 @@ public class Address {
 
     public String getCountry() {
         return this.country;
+    }
+
+    public String getReceiverName() {
+        return this.receiverName;
+    }
+
+    public String getReceiverPhone() {
+        return this.receiverPhone;
     }
 
     public Double getLatitude() {
@@ -96,6 +108,14 @@ public class Address {
         this.country = country;
     }
 
+    public void setReceiverName(final String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public void setReceiverPhone(final String receiverPhone) {
+        this.receiverPhone = receiverPhone;
+    }
+
     public void setLatitude(final Double latitude) {
         this.latitude = latitude;
     }
@@ -112,13 +132,15 @@ public class Address {
     public Address() {
     }
 
-    public Address(Long id, String street, String ward, String district, String city, String country, Double latitude, Double longitude, User user) {
+    public Address(Long id, String street, String ward, String district, String city, String country, String receiverName, String receiverPhone, Double latitude, Double longitude, User user) {
         this.id = id;
         this.street = street;
         this.ward = ward;
         this.district = district;
         this.city = city;
         this.country = country;
+        this.receiverName = receiverName;
+        this.receiverPhone = receiverPhone;
         this.latitude = latitude;
         this.longitude = longitude;
         this.user = user;

@@ -14,7 +14,10 @@ public class AddressDTO {
     private String district;
     private String city;
     private String country;
-    private Double latitude; 
+    private String receiverName;
+    private String receiverPhone;
+    private Double latitude;
     private Double longitude;
     private Long userId;
 }
+

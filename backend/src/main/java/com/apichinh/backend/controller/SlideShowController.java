@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping({ "api/slideShows" })
+@RequestMapping({ "/api/slideShows" })
 @CrossOrigin(origins = { "*" }, exposedHeaders = { "Content-Range" })
 public class SlideShowController {
    private SlideShowService slideShowService;

@@ -1,8 +1,10 @@
 package com.apichinh.backend.controller;
 
 import com.apichinh.backend.entity.User;
+import com.apichinh.backend.response.LoginCredential;
 import com.apichinh.backend.service.UserService;
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping({ "api/users" })
+@RequestMapping({ "/api/users" })
 @CrossOrigin(origins = { "*" }, exposedHeaders = { "Content-Range" })
 public class UserController {
     private UserService userService;
@@ -34,8 +36,21 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        User savedUser = userService.createUser(user);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+        try {
+            User savedUser = userService.createUser(user);
+            return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+        } catch (IllegalArgumentException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginCredential credential) {
+        User user = userService.authenticate(credential.getAccount(), credential.getPassword());
+        if (user == null) {
+            return new ResponseEntity<>("Thông tin đăng nhập không chính xác.", HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PostMapping("/adduser")
@@ -79,6 +94,18 @@ public class UserController {
     public ResponseEntity<User> getUserByPhone(@PathVariable("phone") String phone) {
         User user = userService.getUserByPhone(phone);
         return user != null ? new ResponseEntity<>(user, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/availability")
+    public ResponseEntity<Map<String, Boolean>> checkAvailability(
+            @RequestParam String username,
+            @RequestParam String email,
+            @RequestParam String phone) {
+        Map<String, Boolean> availability = Map.of(
+                "usernameAvailable", userService.getUser(username) == null,
+                "emailAvailable", userService.getUserByEmail(email) == null,
+                "phoneAvailable", userService.getUserByPhone(phone) == null);
+        return new ResponseEntity<>(availability, HttpStatus.OK);
     }
 
     @PostMapping("/google-login")

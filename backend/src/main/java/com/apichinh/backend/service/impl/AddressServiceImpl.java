@@ -31,16 +31,14 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public List<AddressDTO> getAddresses() {
-        // Lấy tất cả địa chỉ từ cơ sở dữ liệu và chuyển đổi thành AddressDTO
         List<Address> addresses = addressRepository.findAll();
         return addresses.stream()
-                .map(address -> modelMapper.map(address, AddressDTO.class)) // Sử dụng ModelMapper
+                .map(address -> modelMapper.map(address, AddressDTO.class))
                 .collect(Collectors.toList());
     }
 
     @Override
     public AddressDTO getAddress(Long id) {
-        // Lấy địa chỉ theo id và chuyển đổi thành AddressDTO
         Optional<Address> address = addressRepository.findById(id);
         return address.map(a -> modelMapper.map(a, AddressDTO.class)).orElse(null);
     }
@@ -48,47 +46,44 @@ public class AddressServiceImpl implements AddressService {
     @Override
     @Transactional
     public AddressDTO createAddress(AddressDTO addressDTO) {
-        // Tạo địa chỉ mới từ AddressDTO
         Address address = modelMapper.map(addressDTO, Address.class);
-        address.setUser(userRepository.findById(addressDTO.getUserId()).orElse(null)); // Gán user cho địa chỉ
+        address.setUser(userRepository.findById(addressDTO.getUserId()).orElse(null));
+        address.setReceiverName(addressDTO.getReceiverName());
+        address.setReceiverPhone(addressDTO.getReceiverPhone());
 
-        // Lưu địa chỉ vào cơ sở dữ liệu
         Address savedAddress = addressRepository.save(address);
-        return modelMapper.map(savedAddress, AddressDTO.class); // Chuyển Address entity sang AddressDTO
+        return modelMapper.map(savedAddress, AddressDTO.class);
     }
 
     @Override
     @Transactional
     public AddressDTO updateAddress(AddressDTO addressDTO) {
-        // Tìm địa chỉ theo id từ DTO
         Optional<Address> addressOptional = addressRepository.findById(addressDTO.getId());
         if (addressOptional.isPresent()) {
             Address address = addressOptional.get();
-            // Cập nhật thông tin địa chỉ từ AddressDTO
-            modelMapper.map(addressDTO, address); // Chuyển từ AddressDTO sang Address để cập nhật
+            modelMapper.map(addressDTO, address);
+            address.setReceiverName(addressDTO.getReceiverName());
+            address.setReceiverPhone(addressDTO.getReceiverPhone());
 
-            // Lưu lại địa chỉ đã cập nhật
             Address updatedAddress = addressRepository.save(address);
-            return modelMapper.map(updatedAddress, AddressDTO.class); // Trả về AddressDTO đã cập nhật
+            return modelMapper.map(updatedAddress, AddressDTO.class);
         }
-        return null; // Nếu không tìm thấy địa chỉ, trả về null
+        return null;
     }
 
     @Override
     @Transactional
     public String deleteAddress(Long id) {
-        // Kiểm tra địa chỉ tồn tại theo id
         Optional<Address> addressOptional = addressRepository.findById(id);
         if (addressOptional.isPresent()) {
-            addressRepository.delete(addressOptional.get()); // Xóa địa chỉ khỏi cơ sở dữ liệu
-            return "Address deleted successfully"; // Trả về thông báo xóa thành công
+            addressRepository.delete(addressOptional.get());
+            return "Address deleted successfully";
         }
-        return "Address not found"; // Trả về thông báo nếu không tìm thấy địa chỉ
+        return "Address not found";
     }
 
     @Override
     public List<AddressDTO> getAddressesByUserId(Long userId) {
-        // Lấy danh sách các địa chỉ của người dùng theo userId và chuyển đổi thành AddressDTO
         List<Address> addresses = addressRepository.findByUserId(userId);
         return addresses.stream()
                 .map(address -> modelMapper.map(address, AddressDTO.class))
@@ -98,26 +93,24 @@ public class AddressServiceImpl implements AddressService {
     @Override
     @Transactional
     public AddressDTO addAddressToUser(AddressDTO addressDTO) {
-        // Lấy người dùng từ userId trong DTO
         Optional<User> userOptional = userRepository.findById(addressDTO.getUserId());
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            // Tạo địa chỉ mới từ AddressDTO và gán người dùng vào
             Address address = modelMapper.map(addressDTO, Address.class);
-            address.setUser(user); // Gán user vào địa chỉ
+            address.setUser(user);
+            address.setReceiverName(addressDTO.getReceiverName());
+            address.setReceiverPhone(addressDTO.getReceiverPhone());
 
-            // Lưu địa chỉ vào cơ sở dữ liệu
             Address savedAddress = addressRepository.save(address);
-            return modelMapper.map(savedAddress, AddressDTO.class); // Trả về AddressDTO đã lưu
+            return modelMapper.map(savedAddress, AddressDTO.class);
         }
-        return null; // Trả về null nếu không tìm thấy người dùng
+        return null;
     }
 
     @Override
     @Transactional
     public void deleteAddressByUserId(Long userId, Long id) {
-        // Kiểm tra và xóa địa chỉ theo userId và id
         Optional<Address> addressOptional = addressRepository.findByIdAndUserId(id, userId);
-        addressOptional.ifPresent(addressRepository::delete); // Xóa nếu tồn tại
+        addressOptional.ifPresent(addressRepository::delete);
     }
 }

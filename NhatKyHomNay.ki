@@ -1,0 +1,58 @@
+# NHẬT KÝ HÔM NAY ( .ki )
+
+Ngày: 2026-06-20
+
+## 1) Hôm nay mình đã làm gì? (Timeline)
+- [ ] Buổi sáng:
+  - 
+- [ ] Buổi chiều:
+  - 
+- [ ] Buổi tối:
+  - 
+
+## 2) Các file / phần dự án đã đụng tới
+- frontend/src/components/home/ProductCard.jsx
+  - 
+- frontend/src/pages/ProductDetail.jsx
+  - 
+- frontend/src/pages/Login.jsx
+  - 
+- frontend/src/pages/Category.jsx
+  - 
+- frontend/src/components/home/Services.jsx
+  - 
+- frontend/src/components/home/NewsSection.jsx
+  - 
+- frontend/src/components/home/FlashSale.jsx
+  - 
+- frontend/src/pages/Home.jsx
+  - 
+- frontend/src/App.jsx
+  - 
+- frontend/src/components/layout/Header.jsx
+  - 
+- frontend/src/pages/SearchResults.jsx
+  - 
+- frontend/src/components/home/ProductSection.jsx
+  - 
+- frontend/src/utils/googleAuth.js
+  - 
+- backend/src/main/java/com/apichinh/backend/service/impl/UserServiceImpl.java
+  - 
+
+## 3) Kết quả đạt được
+- [ ] Đã hoàn thành:
+  - 
+- [ ] Đang chạy / đã test:
+  - 
+
+## 4) Vấn đề gặp phải
+- 
+
+## 5) Việc cần làm tiếp theo (Next steps)
+- [ ] 
+- [ ] 
+
+## 6) Ghi chú / Nhận xét
+- 
+

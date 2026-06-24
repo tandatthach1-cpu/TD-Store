@@ -1,0 +1,235 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* Định nghĩa màu sắc tùy chỉnh cho TD Phone ở đây */
+  --color-primary: #e11d48;
+  --color-secondary: #1f2937;
+}
+
+body {
+  margin: 0;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: #0f172a;
+  background:
+    radial-gradient(circle at top left, rgb(225 29 72 / 0.08), transparent 28%),
+    radial-gradient(circle at top right, rgb(14 165 233 / 0.08), transparent 24%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.auth-input {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  padding-top: 0.65rem;
+  padding-bottom: 0.65rem;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.auth-input::placeholder {
+  color: #94a3b8;
+}
+
+.auth-input:focus {
+  border-color: #e11d48;
+  box-shadow: 0 0 0 3px rgb(225 29 72 / 12%);
+}
+
+.auth-input:disabled {
+  cursor: not-allowed;
+  background: #f1f5f9;
+}
+
+.auth-submit {
+  display: flex;
+  min-height: 48px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border: 0;
+  border-radius: 6px;
+  background: #e11d48;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.auth-submit:hover:not(:disabled) {
+  background: #be123c;
+  box-shadow: 0 8px 20px rgb(225 29 72 / 20%);
+  transform: translateY(-1px);
+}
+
+.auth-submit:focus-visible {
+  outline: 3px solid rgb(225 29 72 / 25%);
+  outline-offset: 2px;
+}
+
+.auth-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.hero-stage {
+  perspective: 1600px;
+  transform-style: preserve-3d;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at center, black 35%, transparent 100%);
+  pointer-events: none;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(16px);
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  animation: floatOrb 16s ease-in-out infinite;
+}
+
+.hero-orb-1 {
+  top: 12%;
+  left: 6%;
+  width: 14rem;
+  height: 14rem;
+  background: rgb(225 29 72 / 0.18);
+}
+
+.hero-orb-2 {
+  top: 18%;
+  right: 10%;
+  width: 12rem;
+  height: 12rem;
+  background: rgb(14 165 233 / 0.16);
+  animation-delay: -5s;
+}
+
+.hero-orb-3 {
+  bottom: 8%;
+  right: 30%;
+  width: 16rem;
+  height: 16rem;
+  background: rgb(249 115 22 / 0.12);
+  animation-delay: -10s;
+}
+
+.hero-tilt-wrapper {
+  transform-style: preserve-3d;
+}
+
+.hero-tilt-card {
+  transform:
+    rotateX(calc(var(--tilt-y, 0) * -5deg))
+    rotateY(calc(var(--tilt-x, 0) * 6deg))
+    translateZ(0);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  will-change: transform;
+}
+
+.hero-media {
+  transform:
+    translate3d(calc(var(--tilt-x, 0) * 8px), calc(var(--tilt-y, 0) * 8px), 0)
+    scale(1.01);
+  transition: transform 180ms ease;
+}
+
+.stat-float {
+  animation: risePulse 6s ease-in-out infinite;
+}
+
+.stat-float:nth-child(2n) {
+  animation-delay: -1.5s;
+}
+
+.stat-float:nth-child(3n) {
+  animation-delay: -3s;
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    filter 220ms ease;
+}
+
+.tilt-card:hover {
+  transform: translateY(-4px) rotateX(3deg) rotateY(-4deg);
+}
+
+.tilt-card img {
+  transform: translateZ(0);
+}
+
+@keyframes floatOrb {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0) scale(1.06);
+  }
+}
+
+@keyframes risePulse {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orb,
+  .stat-float {
+    animation: none;
+  }
+
+  .hero-tilt-card,
+  .hero-media,
+  .tilt-card {
+    transform: none !important;
+  }
+}

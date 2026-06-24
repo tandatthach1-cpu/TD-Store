@@ -49,8 +49,7 @@ public class CartDetailController {
    @GetMapping({ "/cart/{cartId}" })
    public ResponseEntity<List<CartDetail>> getCartByUserId(@PathVariable("cartId") Long cartId) {
       List<CartDetail> cartDetail = this.cartDetailService.getCartDetailByCartId(cartId);
-      return !cartDetail.isEmpty() ? new ResponseEntity<>(cartDetail, HttpStatus.OK)
-            : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      return new ResponseEntity<>(cartDetail, HttpStatus.OK);
    }
 
    @PutMapping({ "{id}" })
