@@ -35,6 +35,39 @@ const resolveImageUrl = (resource, fileName) => {
 
 const normalizeRecord = (resource, item) => {
   const config = resourceImageConfig[resource];
+  if (resource === "products") {
+    const images = Array.isArray(item?.images) ? item.images : [];
+    const galleryFiles = images
+      .filter((image) => !image?.thumbnail)
+      .map((image, index) => {
+        const imageUrl = normalizeImageName(image?.imageUrl);
+        return {
+          id: image?.id ?? index,
+          src: resolveImageUrl(resource, imageUrl),
+          title: imageUrl,
+          thumbnail: Boolean(image?.thumbnail),
+          sortOrder: image?.sortOrder ?? index,
+        };
+      });
+
+    const normalizedProduct = {
+      ...item,
+      galleryFiles,
+    };
+
+    if (!config || !item?.[config.source]) {
+      return normalizedProduct;
+    }
+
+    const normalizedImageName = normalizeImageName(item[config.source]);
+    const previewUrl = resolveImageUrl(resource, normalizedImageName);
+
+    return {
+      ...normalizedProduct,
+      [config.source]: previewUrl,
+    };
+  }
+
   if (!config || !item?.[config.source]) {
     return item;
   }
@@ -136,6 +169,22 @@ const uploadProductGalleryImages = async (productId, galleryFiles) => {
   );
 };
 
+const deleteProductGalleryImages = async (galleryFiles) => {
+  const removedIds = (galleryFiles || [])
+    .map((item) => item?.id)
+    .filter((id) => id !== undefined && id !== null && String(id).length > 0);
+
+  if (removedIds.length === 0) return;
+
+  await Promise.all(
+    removedIds.map((id) =>
+      httpClient(`${apiUrl}/productImages/${id}`, {
+        method: "DELETE",
+      })
+    )
+  );
+};
+
 const sanitizeProductPayload = (data) => {
   const payload = { ...data };
   delete payload.file;
@@ -184,6 +233,18 @@ const dataProvider = {
   update: (resource, params) => {
     const hasUploadFile = Boolean(extractRawFile(params.data?.file));
     const hasGalleryFiles = resource === "products" && extractRawFiles(params.data?.galleryFiles).length > 0;
+    const previousGalleryFiles = resource === "products" ? params.previousData?.galleryFiles || [] : [];
+    const nextGalleryFiles = resource === "products" ? params.data?.galleryFiles || [] : [];
+    const nextGalleryIds = new Set(
+      nextGalleryFiles
+        .map((item) => item?.id)
+        .filter((id) => id !== undefined && id !== null)
+        .map((id) => String(id))
+    );
+    const removedGalleryFiles =
+      resource === "products"
+        ? previousGalleryFiles.filter((item) => item?.id !== undefined && !nextGalleryIds.has(String(item.id)))
+        : [];
     const options = multipartResources.has(resource) || hasUploadFile
       ? {
           method: "PUT",
@@ -196,6 +257,10 @@ const dataProvider = {
         };
 
     return httpClient(`${apiUrl}/${resource}/${params.id}`, options).then(async ({ json }) => {
+      if (resource === "products" && removedGalleryFiles.length > 0) {
+        await deleteProductGalleryImages(removedGalleryFiles);
+      }
+
       if (resource === "products" && hasGalleryFiles) {
         await uploadProductGalleryImages(json.id ?? params.id, params.data.galleryFiles);
       }

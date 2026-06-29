@@ -18,6 +18,7 @@ import {
   TextField,
   TextInput,
 } from "react-admin";
+import ListActions from "./ListActions";
 
 const BannerForm = () => (
   <SimpleForm defaultValues={{ active: true, sortOrder: 0 }}>
@@ -31,7 +32,7 @@ const BannerForm = () => (
 );
 
 export const BannerList = (props) => (
-  <List {...props}>
+  <List actions={<ListActions resource="banners" />} {...props}>
     <Datagrid rowClick="show">
       <TextField source="id" />
       <ImageField source="imagePreview" label="Ảnh" />

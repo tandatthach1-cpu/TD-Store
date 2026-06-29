@@ -70,6 +70,24 @@ const AdminTopBar = (props) => {
   );
 };
 
-const AdminLayout = (props) => <Layout {...props} appBar={AdminTopBar} />;
+const AdminLayout = (props) => (
+  <Layout
+    {...props}
+    appBar={AdminTopBar}
+    sx={{
+      "& .RaLayout-content": {
+        padding: "24px 24px 32px",
+        position: "relative",
+        zIndex: 1,
+      },
+      "& .RaLayout-contentWithSidebar": {
+        alignItems: "stretch",
+      },
+      "& .RaSidebar-drawerPaper": {
+        zIndex: 1400,
+      },
+    }}
+  />
+);
 
 export default AdminLayout;

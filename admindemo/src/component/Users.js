@@ -6,9 +6,11 @@ import {
   Datagrid,
   Edit,
   EditButton,
+  FunctionField,
   ImageField,
   ImageInput,
   List,
+  PasswordInput,
   SimpleForm,
   TextField,
   TextInput,
@@ -20,7 +22,7 @@ export const listUser = (props) => (
       <TextField source="id" />
       <TextField source="username" label="Tên đăng nhập" />
       <TextField source="numphone" label="Số điện thoại" />
-      <TextField source="pass" label="Mật khẩu" />
+      <FunctionField label="Mật khẩu" render={() => "Đã được bảo vệ"} />
       <TextField source="email" label="Email" />
       <BooleanField source="active" label="Hoạt động" />
       <EditButton />
@@ -32,7 +34,12 @@ export const editUser = (props) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="username" label="Tên đăng nhập" fullWidth />
-      <TextInput source="pass" label="Mật khẩu" fullWidth />
+      <PasswordInput
+        source="pass"
+        label="Mật khẩu mới"
+        fullWidth
+        helperText="Để trống nếu không muốn đổi mật khẩu"
+      />
       <TextInput source="numphone" label="Số điện thoại" fullWidth />
       <TextInput source="email" label="Email" fullWidth />
       <ImageInput source="file" label="Ảnh đại diện" accept="image/*">
@@ -43,19 +50,17 @@ export const editUser = (props) => (
   </Edit>
 );
 
-export const CreateUser = (props) => {
-  return (
-    <Create {...props} redirect="users">
-      <SimpleForm>
-        <TextInput source="username" label="Tên đăng nhập" fullWidth />
-        <TextInput source="pass" label="Mật khẩu" fullWidth />
-        <TextInput source="numphone" label="Số điện thoại" fullWidth />
-        <TextInput source="email" label="Email" fullWidth />
-        <ImageInput source="file" label="Ảnh đại diện" accept="image/*">
-          <ImageField source="src" title="Xem trước" />
-        </ImageInput>
-        <BooleanInput source="active" label="Hoạt động" />
-      </SimpleForm>
-    </Create>
-  );
-};
+export const CreateUser = (props) => (
+  <Create {...props} redirect="users">
+    <SimpleForm>
+      <TextInput source="username" label="Tên đăng nhập" fullWidth />
+      <PasswordInput source="pass" label="Mật khẩu" fullWidth />
+      <TextInput source="numphone" label="Số điện thoại" fullWidth />
+      <TextInput source="email" label="Email" fullWidth />
+      <ImageInput source="file" label="Ảnh đại diện" accept="image/*">
+        <ImageField source="src" title="Xem trước" />
+      </ImageInput>
+      <BooleanInput source="active" label="Hoạt động" />
+    </SimpleForm>
+  </Create>
+);

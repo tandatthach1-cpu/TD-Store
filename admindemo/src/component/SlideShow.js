@@ -13,9 +13,10 @@ import {
   useRedirect,
   useNotify,
 } from "react-admin";
+import ListActions from "./ListActions";
 
 export const SlideShowList = (props) => (
-  <List {...props}>
+  <List actions={<ListActions resource="slideShows" />} {...props}>
     <Datagrid>
       <TextField source="id" />
       <TextField source="title" label="Tiêu đề" />

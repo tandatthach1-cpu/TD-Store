@@ -17,6 +17,7 @@ import {
   TextField,
   TextInput,
 } from "react-admin";
+import ListActions from "./ListActions";
 
 const CategoryForm = () => (
   <SimpleForm defaultValues={{ active: true }}>
@@ -31,7 +32,7 @@ const CategoryForm = () => (
 );
 
 export const listCategory = (props) => (
-  <List {...props}>
+  <List actions={<ListActions resource="categories" />} {...props}>
     <Datagrid rowClick="show">
       <TextField source="id" />
       <ImageField source="photo" title="title" label="Ảnh" />

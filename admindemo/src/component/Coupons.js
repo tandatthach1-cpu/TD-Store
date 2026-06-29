@@ -22,6 +22,7 @@ import {
   minValue,
   required,
 } from "react-admin";
+import ListActions from "./ListActions";
 
 const typeChoices = [
   { id: "PERCENT", name: "Phần trăm" },
@@ -86,7 +87,7 @@ const CouponForm = () => (
 );
 
 export const CouponList = (props) => (
-  <List {...props}>
+  <List actions={<ListActions resource="coupons" />} {...props}>
     <Datagrid rowClick="show">
       <TextField source="id" />
       <TextField source="code" label="Mã" />

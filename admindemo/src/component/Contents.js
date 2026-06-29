@@ -21,6 +21,7 @@ import {
   TextField,
   TextInput,
 } from "react-admin";
+import ListActions from "./ListActions";
 
 const contentTypeChoices = [
   { id: "NEWS", name: "Tin tức" },
@@ -59,7 +60,7 @@ const ContentForm = () => (
 );
 
 export const ContentList = (props) => (
-  <List filters={<ContentFilter />} {...props}>
+  <List actions={<ListActions resource="contents" hasFilters />} filters={<ContentFilter />} {...props}>
     <Datagrid rowClick="show">
       <TextField source="id" />
       <ImageField source="imagePreview" label="Ảnh" />

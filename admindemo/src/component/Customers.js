@@ -15,6 +15,7 @@ import {
   TextField,
   TextInput,
 } from "react-admin";
+import ListActions from "./ListActions";
 
 const CustomerForm = () => (
   <SimpleForm defaultValues={{ active: true }}>
@@ -28,7 +29,7 @@ const CustomerForm = () => (
 );
 
 export const CustomerList = (props) => (
-  <List {...props}>
+  <List actions={<ListActions resource="customers" />} {...props}>
     <Datagrid rowClick="show">
       <TextField source="id" />
       <TextField source="username" />

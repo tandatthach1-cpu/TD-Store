@@ -17,6 +17,7 @@ import {
   TextField,
   TextInput,
 } from "react-admin";
+import ListActions from "./ListActions";
 
 const BrandForm = () => (
   <SimpleForm defaultValues={{ active: true }}>
@@ -31,7 +32,7 @@ const BrandForm = () => (
 );
 
 export const BrandList = (props) => (
-  <List {...props}>
+  <List actions={<ListActions resource="brands" />} {...props}>
     <Datagrid rowClick="show">
       <TextField source="id" />
       <ImageField source="logo" title="name" label="Logo" />
