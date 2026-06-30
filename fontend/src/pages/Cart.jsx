@@ -1,7 +1,6 @@
 ﻿import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Minus, Plus, TicketPercent, Trash2 } from 'lucide-react';
-import ZaloPayButton from '../components/payment/ZaloPayButton';
 import { notify } from '../utils/notifications';
 import {
   API_BASE_URL,
@@ -486,6 +485,8 @@ const Cart = () => {
     setCouponMessage('');
   };
 
+  const couponNote = appliedCoupon ? `Mã giảm giá: ${appliedCoupon.code}` : '';
+
   const resolveAddress = async () => {
     const receiverName = String(addressForm.receiverName || '').trim();
     const receiverPhone = String(addressForm.receiverPhone || '').trim();
@@ -555,8 +556,6 @@ const Cart = () => {
   };
 
   const createOrderAndSyncCart = async ({ shippingAddress, paymentStatus, orderStatus }) => {
-    const couponNote = appliedCoupon ? `Mã giảm giá: ${appliedCoupon.code}` : '';
-
     const orderResponse = await fetch(`${API_BASE_URL}/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -611,7 +610,6 @@ const Cart = () => {
     return order;
   };
 
-
   const handleCheckout = async () => {
     if (!user?.id) {
       notify({ type: 'error', message: 'Vui lòng đăng nhập để đặt hàng.' });
@@ -627,13 +625,37 @@ const Cart = () => {
       const shippingAddress = await resolveAddress();
 
       if (paymentMethod === 'ZALOPAY') {
+        const cartSnapshot = {
+          userId: user.id,
+          shippingAddress,
+          subtotal,
+          discountAmount,
+          grandTotal,
+          couponCode: appliedCoupon?.code || null,
+          couponTitle: appliedCoupon?.title || null,
+          note: couponNote,
+          items: details.map((item) => ({
+            productId: item.productId,
+            quantity: item.quantity,
+            unitPrice: parseCurrency(item.product.price),
+            title: item.product.name,
+          })),
+        };
+
         const zalopayResponse = await fetch(`${API_BASE_URL}/zalopay/create-order`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             amount: Math.round(grandTotal),
-            appUser: String(user.id),
+            userId: user.id,
             orderInfo: `Thanh toán đơn hàng của ${user.fullName || user.username || 'khách hàng'}`,
+            customerName: shippingAddress.receiverName,
+            customerPhone: shippingAddress.receiverPhone,
+            address: shippingAddress.label || buildAddressLabel(shippingAddress),
+            note: couponNote,
+            couponCode: appliedCoupon?.code || null,
+            couponTitle: appliedCoupon?.title || null,
+            cartSnapshot,
           }),
         });
 
@@ -650,24 +672,12 @@ const Cart = () => {
           throw new Error('ZaloPay không trả về link thanh toán.');
         }
 
-        const order = await createOrderAndSyncCart({
-          shippingAddress,
-          paymentStatus: 'PENDING',
-          orderStatus: 'Chờ thanh toán',
-        });
-
         setLastOrder({
-          id: order.id,
+          id: zalopayData?.session_code || null,
           address: shippingAddress.label || buildAddressLabel(shippingAddress),
           total: grandTotal,
         });
-        setDetails([]);
-        setAddressForm(makeEmptyAddressForm(user));
-        setAppliedCoupon(null);
-        setCouponCode('');
-        setCouponMessage('');
-        window.dispatchEvent(new Event('cart-updated'));
-        notify({ message: `Đã mở ZaloPay và tạo đơn hàng. Mã đơn #${order.id}` });
+        notify({ message: 'Đã mở ZaloPay. Đơn hàng sẽ được tạo sau khi thanh toán thành công.' });
       } else {
         const order = await createOrderAndSyncCart({
           shippingAddress,
@@ -692,11 +702,6 @@ const Cart = () => {
       notify({ type: 'error', message: err.message || 'Thanh toán thất bại.' });
     }
   };
-
-  const handleZaloPayError = (error) => {
-    notify({ type: 'error', message: error?.message || 'Không mở được ZaloPay sandbox.' });
-  };
-
 
   if (loading) return <div className="py-10 text-center text-gray-600">Đang tải giỏ hàng...</div>;
 
@@ -1073,26 +1078,23 @@ const Cart = () => {
                   <span>Số lượng sản phẩm</span>
                   <span className="font-semibold">{totalQuantity}</span>
                 </div>
-                {paymentMethod === 'ZALOPAY' && (
-                  <ZaloPayButton
-                    amount={grandTotal}
-                    orderInfo={`Thanh toán đơn hàng tạm - ${user?.id || 'guest'}`}
-                    appUser={String(user?.id || 'guest')}
-                    onError={handleZaloPayError}
-                  />
+                {paymentMethod === 'COD' ? (
+                  <button
+                    type="button"
+                    onClick={handleCheckout}
+                    className="block w-full rounded-2xl bg-primary py-4 text-center font-semibold text-white transition-all hover:bg-red-700"
+                  >
+                    Đặt hàng COD
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleCheckout}
+                    className="block w-full rounded-2xl bg-[#0B9BF2] py-4 text-center font-semibold text-white transition-all hover:bg-[#0A85C9]"
+                  >
+                    Thanh toán ZaloPay
+                  </button>
                 )}
-
-                <button
-                  type="button"
-                  onClick={handleCheckout}
-                  className={`block w-full rounded-2xl py-4 text-center font-semibold transition-all ${
-                    paymentMethod === 'COD'
-                      ? 'bg-primary text-white hover:bg-red-700'
-                      : 'border border-slate-200 bg-white text-slate-800 hover:bg-slate-50'
-                    }`}
-                >
-                  {paymentMethod === 'COD' ? 'Đặt hàng COD' : 'Mở thanh toán ZaloPay'}
-                </button>
 
                 <Link
                   to="/products"

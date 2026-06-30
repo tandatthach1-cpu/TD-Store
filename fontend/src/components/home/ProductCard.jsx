@@ -43,11 +43,11 @@ const ProductCard = ({
       ? 'border-primary ring-primary/30'
       : 'border-slate-100 ring-slate-100';
   const motionClass = frameless
-    ? 'transition-all duration-500 ease-out hover:-translate-y-0.5'
+    ? 'transition-all duration-300 ease-out hover:-translate-y-0.5'
     : 'transition-all duration-300';
   const imageClass = frameless
-    ? 'h-full w-full object-contain px-3 py-4 transition-transform duration-500 ease-out group-hover:scale-[1.04]'
-    : 'h-full w-full object-contain px-3 py-4 transition-transform duration-300 group-hover:scale-110';
+    ? 'h-full w-full object-contain px-3 py-4 transition-transform duration-300 ease-out'
+    : 'h-full w-full object-contain px-3 py-4 transition-transform duration-300';
 
   const handleWishlistClick = (event) => {
     event.preventDefault();
@@ -129,7 +129,7 @@ const ProductCard = ({
           />
         </div>
 
-        <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-80">
           <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-black/0 to-black/0" />
         </div>
       </div>

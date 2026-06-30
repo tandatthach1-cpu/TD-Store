@@ -35,7 +35,7 @@ export default function Services() {
         {services.map((item) => (
           <div
             key={item.title}
-            className="group rounded-[1.75rem] border border-gray-100 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
+            className="group rounded-[1.75rem] border border-gray-100 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary transition group-hover:bg-primary group-hover:text-white">
               {item.icon}

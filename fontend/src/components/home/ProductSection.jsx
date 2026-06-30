@@ -18,9 +18,9 @@ export default function ProductSection({
     <section className="container mx-auto px-4 py-12">
       <div className="mb-10 flex items-center justify-between gap-4">
         <div className="flex items-start gap-3">
-          <div className="mt-1 h-10 w-2 rounded-full bg-primary" />
+          <div className="mt-1 h-10 w-1.5 rounded-full bg-primary" />
           <div>
-            <h2 className="text-3xl font-black tracking-tight text-gray-900">{title}</h2>
+            <h2 className="display-serif text-[2rem] font-bold tracking-[-0.03em] text-gray-900 md:text-[2.5rem]">{title}</h2>
             {description && <p className="mt-2 max-w-2xl text-sm leading-7 text-gray-600">{description}</p>}
             <div className="mt-3 h-1.5 w-24 rounded-full bg-primary/15" />
           </div>

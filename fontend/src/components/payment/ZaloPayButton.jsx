@@ -4,7 +4,8 @@ import { API_BASE_URL } from "../../utils/storefront";
 export default function ZaloPayButton({
   amount,
   orderInfo,
-  appUser = "guest",
+  userId,
+  onBeforePay,
   onSuccess,
   onError,
 }) {
@@ -13,37 +14,34 @@ export default function ZaloPayButton({
   const handlePay = async () => {
     setLoading(true);
     try {
+      const prepared = onBeforePay ? await onBeforePay() : null;
+      const paymentAmount = Number(prepared?.amount ?? amount) || 0;
+      const paymentOrderInfo = prepared?.orderInfo || orderInfo;
+      const paymentUserId = prepared?.userId ?? userId;
+      const paymentOrderId = prepared?.orderId ?? prepared?.id ?? null;
+
       const response = await fetch(`${API_BASE_URL}/zalopay/create-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: Number(amount) || 0,
-          orderInfo,
-          appUser,
+          amount: paymentAmount,
+          orderInfo: paymentOrderInfo,
+          userId: paymentUserId,
+          orderId: paymentOrderId,
         }),
       });
 
       const data = await response.json().catch(() => null);
-
       if (!response.ok) {
-        throw new Error(data?.message || data || "Không tạo được thanh toán ZaloPay.");
+        throw new Error(data?.message || "Không tạo được thanh toán ZaloPay.");
       }
 
       const orderUrl = data?.order_url || data?.orderUrl;
-      const transactionToken = data?.zp_trans_token || data?.transaction_token;
-
       if (orderUrl) {
         window.open(orderUrl, "_blank", "noopener,noreferrer");
-        onSuccess?.({ ...data, opened: "order_url" });
-        return;
       }
 
-      if (transactionToken) {
-        onSuccess?.(data);
-        return;
-      }
-
-      throw new Error("ZaloPay sandbox chưa trả về order_url hoặc token.");
+      onSuccess?.({ ...data, prepared });
     } catch (error) {
       console.error(error);
       onError?.(error);
@@ -55,7 +53,7 @@ export default function ZaloPayButton({
   return (
     <button
       type="button"
-      className="mt-4 block w-full rounded-xl bg-[#0B9BF2] py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-[#0A85C9] disabled:opacity-50"
+      className="block w-full rounded-2xl bg-[#0B9BF2] py-4 text-center font-semibold text-white transition-colors hover:bg-[#0A85C9] disabled:opacity-50"
       onClick={handlePay}
       disabled={loading}
     >

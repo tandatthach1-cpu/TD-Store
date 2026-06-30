@@ -100,6 +100,8 @@ export const normalizeProduct = (product) => {
     img: getImageUrl('products', product.photo),
     category: product.category?.title || product.category?.name || '',
     categoryId: product.category?.id || product.categoryId || null,
+    brand: product.brand?.name || product.brand?.title || '',
+    brandId: product.brand?.id || product.brandId || null,
     featured: Boolean(product.featured),
     bestSeller: Boolean(product.bestSeller),
   };

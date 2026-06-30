@@ -37,14 +37,14 @@ export default function TrustStats({ stats }) {
           <div className="bg-[radial-gradient(circle_at_top_left,_rgba(225,29,72,0.18),_transparent_32%),linear-gradient(180deg,_#fff1f2,_#ffffff)] p-8">
             <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-primary shadow-sm">
               <span className="h-2 w-2 rounded-full bg-primary" />
-              Thông số nổi bật
+              Nhịp trang chủ
             </div>
-            <h2 className="mt-5 text-3xl font-black leading-tight text-gray-900">
+            <h2 className="display-serif mt-5 max-w-xl text-[2.45rem] font-bold leading-[1.02] text-gray-900 md:text-[3.35rem]">
               Một trang chủ hiện đại cần vừa đẹp mắt, vừa giúp người mua quyết nhanh hơn
             </h2>
-            <p className="mt-4 text-sm leading-8 text-gray-600">
-              Dữ liệu từ backend được gom lại để hiển thị rõ sản phẩm nổi bật, mẫu bán chạy, danh mục nổi bật và
-              khối khám phá nhanh ngay từ màn hình đầu tiên.
+            <p className="mt-4 max-w-xl text-sm leading-8 text-gray-600 md:text-[15px]">
+              Dữ liệu từ backend được gom lại để hiển thị rõ sản phẩm nổi bật, mẫu bán chạy, danh mục nổi bật và các khối
+              khám phá nhanh ngay từ màn hình đầu tiên.
             </p>
           </div>
 
@@ -57,8 +57,8 @@ export default function TrustStats({ stats }) {
                 <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                   {item.icon}
                 </div>
-                <div className="mt-4 text-3xl font-black text-gray-900">{item.value}</div>
-                <div className="mt-2 text-sm font-bold uppercase tracking-wide text-gray-700">{item.label}</div>
+                <div className="mt-4 text-3xl font-black text-gray-900 tabular-nums">{item.value}</div>
+                <div className="mt-2 text-sm font-semibold text-gray-800">{item.label}</div>
                 <p className="mt-2 text-sm leading-7 text-gray-500">{item.description}</p>
               </div>
             ))}

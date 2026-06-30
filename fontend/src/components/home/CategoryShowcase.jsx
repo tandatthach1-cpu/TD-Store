@@ -29,9 +29,9 @@ export default function CategoryShowcase({ items }) {
       <div className="mb-8 flex items-end justify-between gap-4">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-primary">
-            Danh mục nổi bật
+            Đường vào nhanh
           </div>
-          <h2 className="mt-4 text-3xl font-black tracking-tight text-gray-900">
+          <h2 className="display-serif mt-4 text-[2.35rem] font-bold tracking-[-0.03em] text-gray-900 md:text-[3rem]">
             Đi nhanh vào đúng nhóm sản phẩm bạn cần
           </h2>
           <p className="mt-2 text-sm leading-7 text-gray-600">

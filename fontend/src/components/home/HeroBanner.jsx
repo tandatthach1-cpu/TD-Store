@@ -103,7 +103,7 @@ export default function HeroBanner({ slides = [], categories = [], stats }) {
               Không gian mua sắm công nghệ
             </div>
 
-            <h1 className="mt-6 max-w-3xl text-4xl font-black leading-tight tracking-tight md:text-6xl">
+            <h1 className="display-serif mt-6 max-w-3xl text-[3rem] font-bold leading-[0.98] tracking-[-0.03em] md:text-[5rem]">
               {currentSlide.title}
             </h1>
 
@@ -138,21 +138,21 @@ export default function HeroBanner({ slides = [], categories = [], stats }) {
             </div>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-2xl border border-white/10 bg-white/8 p-4 backdrop-blur">
+              <div className="rounded-2xl border border-white/10 bg-white/6 p-4 backdrop-blur">
                 <div className="flex items-center gap-2 text-red-200">
                   <ShieldCheck size={16} />
                   <span className="text-xs font-bold uppercase tracking-wide">Chính hãng</span>
                 </div>
                 <p className="mt-3 text-sm text-slate-100">Nguồn gốc rõ ràng, hỗ trợ bảo hành minh bạch.</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/8 p-4 backdrop-blur">
+              <div className="rounded-2xl border border-white/10 bg-white/6 p-4 backdrop-blur">
                 <div className="flex items-center gap-2 text-sky-200">
                   <Truck size={16} />
                   <span className="text-xs font-bold uppercase tracking-wide">Giao nhanh</span>
                 </div>
                 <p className="mt-3 text-sm text-slate-100">Ưu tiên giao sớm cho các đơn hàng nội thành.</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/8 p-4 backdrop-blur">
+              <div className="rounded-2xl border border-white/10 bg-white/6 p-4 backdrop-blur">
                 <div className="flex items-center gap-2 text-amber-200">
                   <Sparkles size={16} />
                   <span className="text-xs font-bold uppercase tracking-wide">Tư vấn đúng nhu cầu</span>
@@ -163,7 +163,7 @@ export default function HeroBanner({ slides = [], categories = [], stats }) {
           </div>
 
           <div className="relative hero-tilt-wrapper">
-            <div className="hero-tilt-card rounded-[2rem] border border-white/10 bg-white/8 p-5 shadow-2xl shadow-black/20 backdrop-blur-xl">
+            <div className="hero-tilt-card rounded-[2rem] border border-white/10 bg-black/18 p-5 shadow-2xl shadow-black/20 backdrop-blur-xl">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-sm uppercase tracking-[0.2em] text-red-200">Toàn cảnh trang chủ</div>

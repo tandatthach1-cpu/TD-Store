@@ -30,9 +30,9 @@ export default function NewsSection({ items }) {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-black uppercase tracking-[0.24em] text-primary">
               <NotebookPen size={14} />
-              Tin tức & tư vấn
+              Tin tức gọn
             </div>
-            <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-900 md:text-4xl">
+            <h2 className="display-serif mt-4 text-[2.35rem] font-bold tracking-[-0.03em] text-slate-900 md:text-[3rem]">
               Nội dung gọn, đẹp và đủ thông tin để người mua ra quyết định nhanh hơn
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600">
@@ -107,7 +107,7 @@ export default function NewsSection({ items }) {
                   <Headphones size={14} />
                   Tư vấn nhanh
                 </div>
-                <h3 className="mt-4 text-2xl font-black leading-tight">
+                <h3 className="mt-4 text-[1.75rem] font-bold leading-tight tracking-[-0.03em]">
                   Chưa biết chọn máy nào? Hãy để nội dung tư vấn giúp bạn thu hẹp lựa chọn.
                 </h3>
                 <p className="mt-3 text-sm leading-7 text-slate-200/90">

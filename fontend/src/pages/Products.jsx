@@ -43,6 +43,7 @@ const getInitialFilters = () => {
   return {
     search: params.get('q') || '',
     category: params.get('category') || 'all',
+    brandId: params.get('brandId') || 'all',
     sort: params.get('sort') || 'featured',
     quick: params.get('quick') || 'all',
     min: params.get('min') || '',
@@ -60,6 +61,7 @@ const Products = () => {
   const initialFilters = useMemo(getInitialFilters, []);
   const [search, setSearch] = useState(initialFilters.search);
   const [categoryFilter, setCategoryFilter] = useState(initialFilters.category);
+  const [brandFilter, setBrandFilter] = useState(initialFilters.brandId);
   const [sortBy, setSortBy] = useState(initialFilters.sort);
   const [quickFilter, setQuickFilter] = useState(initialFilters.quick);
   const [minPrice, setMinPrice] = useState(initialFilters.min);
@@ -102,6 +104,10 @@ const Products = () => {
       list = list.filter((product) => String(product.categoryId) === String(categoryFilter));
     }
 
+    if (brandFilter !== 'all') {
+      list = list.filter((product) => String(product.brandId) === String(brandFilter));
+    }
+
     if (quickFilter === 'featured') {
       list = list.filter((product) => product.featured);
     } else if (quickFilter === 'bestSeller') {
@@ -137,7 +143,7 @@ const Products = () => {
     }
 
     return list;
-  }, [categoryFilter, maxPrice, minPrice, products, quickFilter, search, sortBy]);
+  }, [brandFilter, categoryFilter, maxPrice, minPrice, products, quickFilter, search, sortBy]);
 
   useEffect(() => {
     if (!filteredProducts.length) {
@@ -175,6 +181,9 @@ const Products = () => {
       case 'category':
         setCategoryFilter(normalized);
         break;
+      case 'brandId':
+        setBrandFilter(normalized);
+        break;
       case 'sort':
         setSortBy(normalized);
         break;
@@ -198,6 +207,7 @@ const Products = () => {
   const resetFilters = () => {
     setSearch('');
     setCategoryFilter('all');
+    setBrandFilter('all');
     setSortBy('featured');
     setQuickFilter('all');
     setMinPrice('');
